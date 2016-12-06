@@ -2,21 +2,23 @@
 <#
 .SYNOPSIS
   Script to organize files in a directory.
+
 .DESCRIPTION
   This script helps the user to better organize file or items in a directory.
-.PARAMETER <Parameter_Name>
-    <Brief description of parameter input required. Repeat this attribute if required>
+
+.PARAMETER <Name>
+    A name or expression for name of items.
+
 .INPUTS
-  <Inputs if any, otherwise state None>
+  None
+
 .OUTPUTS
-  <Outputs if any, otherwise state None - example: Log file stored in C:\Windows\Temp\<name>.log>
+  None
+
 .NOTES
-  Version:        1.0
-  Author:         <Name>
-  Creation Date:  <Date>
-  Purpose/Change: Initial script development
+  Copyright © Zealag 2016. All rights reserved.
   
 .EXAMPLE
-  <Example goes here. Repeat this attribute for more than one example>
+  None
 #>
 
