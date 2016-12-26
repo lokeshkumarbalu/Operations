@@ -16,15 +16,11 @@ Param
 	[Parameter(Mandatory = $true, Position = 1)]
 	[string]$Filter,
 
-	#[Parameter(Mandatory = $true, Position = 2)]
-	#[ValidateSet("TimeStamp","FileName")]
-	#[String]$Criteria,
-
-	[Parameter(Mandatory = $true, Position = 3)]
+	[Parameter(Mandatory = $true, Position = 2)]
 	[ValidateScript({Test-Path $_ -PathType "Container"})]
 	[String]$Source,
 
-	[Parameter(Mandatory = $true, Position = 4)]
+	[Parameter(Mandatory = $true, Position = 3)]
 	[ValidateScript({Test-Path $_ -PathType "Container"})]
 	[String]$Destination
 )
