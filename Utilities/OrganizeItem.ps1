@@ -44,7 +44,7 @@ $fileCount = ($list | Measure-Object ).Count;
 $processed = 0;
 
 Write-Progress -Activity "Organizing files" `
-		-Status "$processed/$fileCount % Complete:" `
+		-Status "$processed/$fileCount items complete:" `
 		-PercentComplete $(($processed/$fileCount)*100);
 
 ForEach ($file in $list)
@@ -65,7 +65,7 @@ ForEach ($file in $list)
 	$processed = $processed + 1;
 
 	Write-Progress -Activity "Organizing files" `
-		-Status "$processed/$fileCount % Complete:" `
+		-Status "$processed/$fileCount items complete:" `
 		-PercentComplete $(($processed/$fileCount)*100);
 
 }
