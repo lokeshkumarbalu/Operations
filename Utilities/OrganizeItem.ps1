@@ -16,13 +16,13 @@ Param
 	[Parameter(Mandatory = $true, Position = 1)]
 	[string]$Filter,
 
-	[Parameter(Mandatory = $true, Position = 2)]
+	[Parameter(Position = 2)]
 	[ValidateScript({Test-Path $_ -PathType "Container"})]
-	[String]$Source,
+	[String]$Source = "./",
 
-	[Parameter(Mandatory = $true, Position = 3)]
+	[Parameter(Position = 3)]
 	[ValidateScript({Test-Path $_ -PathType "Container"})]
-	[String]$Destination
+	[String]$Destination = "./"
 )
 
 Write-Verbose -Message "Organizing the items matching string: $Filter; with criteria: $Criteria";  
