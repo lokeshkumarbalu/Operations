@@ -25,7 +25,7 @@ Param
 	[String]$Destination = "./"
 )
 
-Write-Verbose -Message "Organizing the items matching string: $Filter; with criteria: $Criteria";  
+Write-Verbose -Message "Organizing the items matching string: '$Filter'";  
 Write-Verbose -Message "Destination path: $(Resolve-Path $Destination)";
 Write-Verbose -Message "Source path: $(Resolve-Path $Source)";
 
