@@ -17,11 +17,11 @@ Param
 	[string]$Filter,
 
 	[Parameter(Position = 2)]
-	[ValidateScript({Test-Path $_ -PathType "Container"})]
+	[ValidateScript({Test-Path $PSItem -PathType "Container"})]
 	[String]$Source = "./",
 
 	[Parameter(Position = 3)]
-	[ValidateScript({Test-Path $_ -PathType "Container"})]
+	[ValidateScript({Test-Path $PSItem -PathType "Container"})]
 	[String]$Destination = "./"
 )
 
