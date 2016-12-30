@@ -56,7 +56,7 @@ ForEach ($line in $content)
 			$foundMultiLineComment = $TRUE;
 			$line = $line -replace '\/\*.*', '';
 		}
-		$line = $line.Trim();
+		$line = $line.TrimEnd();
 	}
 	else
 	{
@@ -64,7 +64,7 @@ ForEach ($line in $content)
 		{
 			$line = $line -replace '.*\*\/' , '';
 			$line = $line -replace '\/\/.*', '';
-			$line = $line.Trim();
+			$line = $line.TrimEnd();
 			$foundMultiLineComment = $FALSE;
 		}
 		else
