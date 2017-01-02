@@ -15,76 +15,89 @@ Param
 (
 	[Parameter(Mandatory = $true, Position = 1)]
 	[ValidateScript({Test-Path $PSItem -PathType "Leaf"})]
-	[string]$FileName,
+	[string]$Filter,
 
 	[Parameter(Position = 2)]
 	[ValidateScript({Test-Path $PSItem -PathType "Container"})]
 	[string]$Destination = ".\"
 )
 
-$SourceFile = Get-ChildItem $FileName;
-$outFile = $($(Resolve-Path $Destination).ToString());
-$outFile = $($outFile + "\Out_" + $SourceFile.BaseName + $SourceFile.Extension);
-
-$content = Get-Content $(Resolve-Path $FileName);
-$foundMultiLineComment = $FALSE;
-$lineCount = $content.Length;
-$processed = 0;
-
-Write-Verbose -Message "Working on the file $(Resolve-Path $FileName)";
+Write-Verbose -Message "Working with filter: $Filter";
 Write-Verbose -Message "Destination path: $(Resolve-Path $Destination)";
-Write-Verbose -Message "Output file: $outFile";
 
-ForEach ($line in $content)
+Function Main()
 {
-	$processed = $processed + 1;
-	if ($($line.Length) -eq 0)
+	$fileList = Get-ChildItem $Filter -File;
+	ForEach ($file in $fileList)
 	{
-		$line >> $outFile;
-		Write-Progress -Activity "Removing comments" `
-			-Status "$processed/$lineCount lines complete:" `
-			-PercentComplete $(($processed/$lineCount)*100);
-		continue;
+		ProcessFile($file);
 	}
+}
 
-	if ($foundMultiLineComment -eq $FALSE)
+Function ProcessFile($fileName) 
+{
+	$content = Get-Content $(Resolve-Path $fileName);
+	$outFile = $($(Resolve-Path $Destination).ToString());
+	$outFile = $($outFile + "\Out_" + $fileName.BaseName + $fileName.Extension);
+
+	Write-Verbose -Message "Working on the file $(Resolve-Path $fileName)";
+	Write-Verbose -Message "Output file: $outFile";
+
+	$foundMultiLineComment = $FALSE;
+	$lineCount = $content.Length;
+	$processed = 0;
+
+	ForEach ($line in $content)
 	{
-		$line = $line -replace '\/\*.*\*\/' , '';
-		$line = $line -replace '\/\/.*', '';
-		if ($line -match '\/\*.*' -eq $TRUE)
+		$processed = $processed + 1;
+		if ($($line.Length) -eq 0)
 		{
-			$foundMultiLineComment = $TRUE;
-			$line = $line -replace '\/\*.*', '';
+			$line >> $outFile;
+			Write-Progress -Activity "Removing comments" `
+				-Status "$processed/$lineCount lines complete:" `
+				-PercentComplete $(($processed/$lineCount)*100);
+			continue;
 		}
-		$line = $line.TrimEnd();
-	}
-	else
-	{
-		if($line -match '.*\*\/' -eq $TRUE)
+
+		if ($foundMultiLineComment -eq $FALSE)
 		{
-			$line = $line -replace '.*\*\/' , '';
+			$line = $line -replace '\/\*.*\*\/' , '';
 			$line = $line -replace '\/\/.*', '';
+			if ($line -match '\/\*.*' -eq $TRUE)
+			{
+				$foundMultiLineComment = $TRUE;
+				$line = $line -replace '\/\*.*', '';
+			}
 			$line = $line.TrimEnd();
-			$foundMultiLineComment = $FALSE;
 		}
 		else
 		{
-			$line = $line -replace '.*' , '';
+			if($line -match '.*\*\/' -eq $TRUE)
+			{
+				$line = $line -replace '.*\*\/' , '';
+				$line = $line -replace '\/\/.*', '';
+				$line = $line.TrimEnd();
+				$foundMultiLineComment = $FALSE;
+			}
+			else
+			{
+				$line = $line -replace '.*' , '';
+			}
 		}
-	}
 	
-	if ($($line.Length) -ne 0)
-	{
-		$line >> $outFile;
-	}
+		if ($($line.Length) -ne 0)
+		{
+			$line >> $outFile;
+		}
 
-	Write-Progress -Activity "Removing comments" `
-		-Status "$processed/$lineCount lines complete:" `
-		-PercentComplete $(($processed/$lineCount)*100);
+		Write-Progress -Activity "Removing comments" `
+			-Status "$processed/$lineCount lines complete:" `
+			-PercentComplete $(($processed/$lineCount)*100);
+	}
 }
 
-
-
+#Call Main function here.
+Main;
 
 
 
