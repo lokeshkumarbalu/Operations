@@ -1,4 +1,4 @@
-#requires -version 2
+#requires -version 3
 <#
 .SYNOPSIS
   Script to remove simple C style comments.
@@ -13,7 +13,7 @@
 [CmdletBinding()]
 Param
 (
-	[Parameter(Mandatory = $true, Position = 1)]
+	[Parameter(Position = 1, Mandatory = $true)]
 	[ValidateScript({Test-Path $PSItem -PathType "Leaf"})]
 	[string]$Filter,
 
@@ -43,6 +43,7 @@ Function ProcessFile($fileName)
 	Write-Verbose -Message "Working on the file $(Resolve-Path $fileName)";
 	Write-Verbose -Message "Output file: $outFile";
 
+	$foundEmptyLine = $TRUE;
 	$foundMultiLineComment = $FALSE;
 	$lineCount = $content.Length;
 	$processed = 0;
@@ -52,7 +53,12 @@ Function ProcessFile($fileName)
 		$processed = $processed + 1;
 		if ($($line.Length) -eq 0)
 		{
-			$line >> $outFile;
+			if ($foundEmptyLine -eq $FALSE)
+			{
+				$line >> $outFile;
+				$foundEmptyLine = $TRUE;
+			}
+			
 			Write-Progress -Activity "Removing comments" `
 				-Status "$processed/$lineCount lines complete:" `
 				-PercentComplete $(($processed/$lineCount)*100);
@@ -88,6 +94,7 @@ Function ProcessFile($fileName)
 		if ($($line.Length) -ne 0)
 		{
 			$line >> $outFile;
+			$foundEmptyLine = $FALSE;
 		}
 
 		Write-Progress -Activity "Removing comments" `
