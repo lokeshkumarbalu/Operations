@@ -1,4 +1,3 @@
-#requires -version 3
 <#
 .SYNOPSIS
   Script to remove simple C style comments.
@@ -6,18 +5,30 @@
 .DESCRIPTION
   This script helps the user to remove C style comments for formatting purpose.
 
+.PARAMETER Filter
+  Specifies a filter in the provider's format or language. The value of this parameter qualifies the Path parameter.
+
+.PARAMETER Destination
+  Specifies a path to destination location. Wildcards are permitted. The default location is the current directory (.).
+
 .NOTES
+  Author: Lokesh Kumar Balu
+  Date: December 14, 2016
   Copyright © Zealag 2016. All rights reserved.
 #>
 
+#Requires -Version 3.0
 [CmdletBinding()]
 Param
 (
-	[Parameter(Position = 1, Mandatory = $true)]
+	[Parameter(
+		Position = 1, 
+		Mandatory = $true)]
 	[ValidateScript({Test-Path $PSItem -PathType "Leaf"})]
 	[string]$Filter,
 
-	[Parameter(Position = 2)]
+	[Parameter(
+		Position = 2)]
 	[ValidateScript({Test-Path $PSItem -PathType "Container"})]
 	[string]$Destination = ".\"
 )
