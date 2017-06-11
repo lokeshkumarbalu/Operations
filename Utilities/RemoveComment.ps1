@@ -5,11 +5,20 @@
 .DESCRIPTION
   This script helps the user to remove C style comments for formatting purpose.
 
+.INPUTS
+  None. You cannot pipe objects to this command.
+
+.OUTPUTS
+  None. This command does not output any objects to be piped.
+
 .PARAMETER Filter
   Specifies a filter in the provider's format or language. The value of this parameter qualifies the Path parameter.
 
 .PARAMETER Destination
   Specifies a path to destination location. Wildcards are permitted. The default location is the current directory (.).
+
+.LINK
+  https://github.com/lokeshkumarbalu
 
 .NOTES
   Author: Lokesh Kumar Balu

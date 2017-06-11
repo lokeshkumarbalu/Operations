@@ -5,6 +5,12 @@
 .DESCRIPTION
   This script helps the user to better organize files in a directory.
 
+.INPUTS
+  None. You cannot pipe objects to this command.
+
+.OUTPUTS
+  None. This command does not output any objects to be piped.
+
 .PARAMETER Filter
   Specifies a filter in the provider's format or language. The value of this parameter qualifies the Path parameter.
 
@@ -16,6 +22,9 @@
 
 .PARAMETER Level
   Specifies the level to organize files, the parameter can take only these values - Day, Month and Year.
+
+.LINK
+  https://github.com/lokeshkumarbalu
 
 .NOTES
   Author: Lokesh Kumar Balu
