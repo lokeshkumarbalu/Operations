@@ -20,7 +20,7 @@
 .NOTES
   Author: Lokesh Kumar Balu
   Date: June 12, 2017
-  Copyright © Zealag 2017. All rights reserved.
+  Copyright @ Zealag 2017. All rights reserved.
 #>
 
 #Requires -Version 3.0

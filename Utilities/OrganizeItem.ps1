@@ -1,4 +1,4 @@
-﻿<#
+<#
 .SYNOPSIS
   Script to organize files in a directory.
 
@@ -29,7 +29,7 @@
 .NOTES
   Author: Lokesh Kumar Balu
   Date: December 06, 2016
-  Copyright © Zealag 2016. All rights reserved.
+  Copyright @ Zealag 2016. All rights reserved.
 #>
 
 #Requires -Version 2.0

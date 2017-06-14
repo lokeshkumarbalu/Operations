@@ -18,5 +18,5 @@
 .NOTES
   Author: Lokesh Kumar Balu
   Date: January 02, 2017
-  Copyright © Zealag 2017. All rights reserved.
+  Copyright @ Zealag 2017. All rights reserved.
 #>
