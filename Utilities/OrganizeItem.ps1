@@ -39,7 +39,7 @@ Param
 (
 	[Parameter(
 		Mandatory = $true, 
-		Position = 1, 
+		Position = 1,  
 		HelpMessage = "The files to organize.")]
 	[string]$Filter,
 
