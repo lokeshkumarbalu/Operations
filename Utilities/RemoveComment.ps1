@@ -113,7 +113,7 @@ Function ProcessFile($fileName)
 	
 		if ($($line.Length) -ne 0)
 		{
-			$line >> $outFile;
+			$line | Out-File -FilePath $outFile -Encoding utf8 -Append;
 			$foundEmptyLine = $FALSE;
 		}
 
@@ -125,6 +125,3 @@ Function ProcessFile($fileName)
 
 #Call Main function here.
 Main;
-
-
-
