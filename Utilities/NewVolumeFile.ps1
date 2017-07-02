@@ -14,6 +14,21 @@
 .OUTPUTS
   None. This command does not output any objects to be piped.
 
+.PARAMETER DealNumber
+  Deal number for which the volume file must be produced.
+
+.PARAMETER VolumeType
+  Volume type of the volumes in the file.
+
+.PARAMETER StartDate
+  Start date from which the volumes will be updated.
+
+.PARAMETER EndDate
+  End date till which the volumes will be updated.
+
+.PARAMETER Quantity
+  Quantity of volume to be updated.
+
 .LINK
   https://github.com/lokeshkumarbalu
 
@@ -60,7 +75,6 @@ Param
 	[String]$Quantity
 )
 
-$line = "";
 $FileName = $(".\") + $DealNumber + $("_") +$VolumeType +$(".csv");
 $volumeTypeId = 2;
 
@@ -69,7 +83,6 @@ if ($(Test-Path -Path $FileName -PathType Leaf) -eq $false)
 	$header = "deal_id,param_seq_num,schedule_date,volume_type_id,quantity";
 	$header >> $FileName;
 }
-
 
 Switch($VolumeType)
 {
@@ -85,5 +98,5 @@ for (;$StartDate -le $EndDate; $StartDate = $StartDate.AddDays(1))
 	$DealNumber + $(",1,") + `
 	$StartDate.ToString("yyyy-MM-dd") + $(",") + `
 	$volumeTypeId + $(",") + `
-	$Quantity >> $FileName;
+	$Quantity | Out-File -FilePath $FileName -Encoding utf8 -Append;
 }
