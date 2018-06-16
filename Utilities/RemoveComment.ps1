@@ -31,7 +31,7 @@
 Param
 (
 	[Parameter(
-		Position = 1, 
+		Position = 1,
 		Mandatory = $true)]
 	[ValidateScript({Test-Path $PSItem -PathType "Leaf"})]
 	[string]$Filter,
@@ -54,7 +54,7 @@ Function Main()
 	}
 }
 
-Function ProcessFile($fileName) 
+Function ProcessFile($fileName)
 {
 	$content = Get-Content $(Resolve-Path $fileName);
 	$outFile = $($(Resolve-Path $Destination).ToString());
@@ -78,7 +78,7 @@ Function ProcessFile($fileName)
 				$line >> $outFile;
 				$foundEmptyLine = $TRUE;
 			}
-			
+
 			Write-Progress -Activity "Removing comments" `
 				-Status "$processed/$lineCount lines complete:" `
 				-PercentComplete $(($processed/$lineCount)*100);
@@ -110,7 +110,7 @@ Function ProcessFile($fileName)
 				$line = $line -replace '.*' , '';
 			}
 		}
-	
+
 		if ($($line.Length) -ne 0)
 		{
 			$line | Out-File -FilePath $outFile -Encoding utf8 -Append;

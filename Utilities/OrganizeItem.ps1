@@ -38,31 +38,31 @@
 Param
 (
 	[Parameter(
-		Mandatory = $true, 
-		Position = 1, 
+		Mandatory = $true,
+		Position = 1,
 		HelpMessage = "The files to organize.")]
 	[string]$Filter,
 
 	[Parameter(
-		Position = 2, 
+		Position = 2,
 		HelpMessage = "Source path where the files to be organized is found.")]
 	[ValidateScript({Test-Path $PSItem -PathType "Container"})]
 	[String]$Source = "./",
 
 	[Parameter(
-		Position = 3, 
+		Position = 3,
 		HelpMessage = "Destination path where the files will be organized.")]
 	[ValidateScript({Test-Path $PSItem -PathType "Container"})]
 	[String]$Destination = "./",
 
-	[Parameter( 
-		Position = 4, 
+	[Parameter(
+		Position = 4,
 		HelpMessage = "Specifies level at which the files must be organized.")]
 	[ValidateSet("Year", "Month", "Day")]
 	[String]$Level = "Day"
 )
 
-Write-Verbose -Message "Organizing the items matching string: '$Filter'";  
+Write-Verbose -Message "Organizing the items matching string: '$Filter'";
 Write-Verbose -Message "Destination path: $(Resolve-Path $Destination)";
 Write-Verbose -Message "Source path: $(Resolve-Path $Source)";
 
@@ -114,9 +114,9 @@ ForEach ($file in $list)
 		$moveLocation = $moveLocation + $("\") +`
 			$($workingDate.Year) + $("\") + `
 			$($workingDate.Month.ToString("00")) + $("\") + `
-			$($workingDate.Day.ToString("00"));	
+			$($workingDate.Day.ToString("00"));
 	}
-	 
+
 	if ($(Test-Path -Path $moveLocation -PathType Container) -eq $false)
 	{
 		New-Item -ItemType "Directory" -Path $moveLocation | Out-Null;

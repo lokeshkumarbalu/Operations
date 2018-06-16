@@ -44,33 +44,33 @@
 Param
 (
 	[Parameter(
-		Mandatory = $true, 
-		Position = 1, 
+		Mandatory = $true,
+		Position = 1,
 		HelpMessage = "The deal for which volume file must be generated.")]
 	[string]$DealNumber,
 
 	[Parameter(
-		Mandatory = $true, 
-		Position = 2, 
+		Mandatory = $true,
+		Position = 2,
 		HelpMessage = "The volume type that is to be updated.")]
 	[ValidateSet("Trading", "Planned", "Optimized", "Metered", "Allocated")]
 	[string]$VolumeType,
 
 	[Parameter(
-		Mandatory = $true, 
-		Position = 3, 
+		Mandatory = $true,
+		Position = 3,
 		HelpMessage = "Start date (inclusive) from which the volume must be updated.")]
 	[DateTime]$StartDate,
 
 	[Parameter(
-		Mandatory = $true, 
-		Position = 4, 
+		Mandatory = $true,
+		Position = 4,
 		HelpMessage = "End date (inclusive) till which the volume must be updated.")]
 	[DateTime]$EndDate,
 
 	[Parameter(
-		Mandatory = $true, 
-		Position = 5, 
+		Mandatory = $true,
+		Position = 5,
 		HelpMessage = "Volume quantity (daily volume) to be updated for the time period specified.")]
 	[String]$Quantity
 )
